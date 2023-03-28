@@ -13,30 +13,23 @@ function TrendingCoinsTable() {
   useEffect(() => {
     axios.get(`https://api.coingecko.com/api/v3/search/trending`)
     .then(response => {
-      console.log(response);
-      setTrendingCoins(response.data.coins);
+      console.log("Raw data: ", response);
+      const originalCoins = response.data.coins;
+      originalCoins.forEach(element => {
+        element.item.favorite_status = "No";
+      });
+      console.log("Raw coins: ", response.data.coins);
+      setTrendingCoins(originalCoins);
     });
-  }, []);
-
-  // let favoriteStatusColumn = {
-  //   favorite: 0,
-  // }
-
-  
-  // trendingCoins.forEach(element => {
-  //   setTrendingCoins(...element, favoriteStatusColumn);
-  // });
-  
-    
+  }, []); 
   
 
-  console.log(trendingCoins);
-  // console.log(trendingCoins[0].item.id);
+  console.log("List of trending coins: ", trendingCoins);
 
   const tableData = useMemo(() => trendingCoins, [trendingCoins]);
-  // const tableData = useMemo(() => mockData, []);
   
-  console.log(tableData);
+  
+  console.log("Table Data: ", tableData);
   const columns = useMemo(() => [
     {
       Header: "IMAGE",
@@ -64,6 +57,10 @@ function TrendingCoinsTable() {
     {
       Header: "PRICE BTC",
       accessor: "item.price_btc",
+    },
+    {
+      Header: "FAVORITE",
+      accessor: "item.favorite_status",
     }
   ], []);
 
