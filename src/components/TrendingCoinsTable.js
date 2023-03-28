@@ -1,4 +1,6 @@
 import './App.css';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Fab from '@mui/material/Fab';
 import axios from 'axios';
 import * as React from "react";
 import { useEffect, useState, useMemo } from 'react';
@@ -60,6 +62,10 @@ function TrendingCoinsTable() {
     },
     {
       Header: "FAVORITE",
+      Cell: tableProps => (
+        <Fab>
+        <FavoriteBorderIcon/>
+        </Fab>),
       accessor: "item.favorite_status",
     }
   ], []);
