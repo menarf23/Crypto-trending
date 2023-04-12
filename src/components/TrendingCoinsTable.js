@@ -31,7 +31,7 @@ function TrendingCoinsTable() {
 
   const tableData = useMemo(() => trendingCoins, [trendingCoins]);
 
-  function toggleFavoriteStatus(id, currentValue) {
+  function toggleFavoriteStatus(id) {
     console.log(id);
   }
   
@@ -67,7 +67,7 @@ function TrendingCoinsTable() {
     {
       Header: "FAVORITE",
       Cell: tableProps => (
-        <Fab size="medium" onClick={() => toggleFavoriteStatus(tableProps.row.index, tableProps.row.original.item.favorite_status)}>
+        <Fab size="medium" onClick={() => toggleFavoriteStatus(tableProps.row.index)}>
         {tableProps.row.original.item.favorite_status ? <FavoriteIcon/> : <FavoriteBorderIcon/> }
         </Fab>),
       accessor: "item.favorite_status",
