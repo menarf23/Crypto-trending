@@ -1,5 +1,6 @@
 import './App.css';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import Fab from '@mui/material/Fab';
 import axios from 'axios';
 import * as React from "react";
@@ -18,7 +19,7 @@ function TrendingCoinsTable() {
       console.log("Raw data: ", response);
       const originalCoins = response.data.coins;
       originalCoins.forEach(element => {
-        element.item.favorite_status = "No";
+        element.item.favorite_status = false;
       });
       console.log("Raw coins: ", response.data.coins);
       setTrendingCoins(originalCoins);
@@ -29,9 +30,12 @@ function TrendingCoinsTable() {
   console.log("List of trending coins: ", trendingCoins);
 
   const tableData = useMemo(() => trendingCoins, [trendingCoins]);
+
+  function toggleFavoriteStatus(id, currentValue) {
+    console.log(id);
+  }
   
   
-  console.log("Table Data: ", tableData);
   const columns = useMemo(() => [
     {
       Header: "IMAGE",
@@ -63,12 +67,14 @@ function TrendingCoinsTable() {
     {
       Header: "FAVORITE",
       Cell: tableProps => (
-        <Fab>
-        <FavoriteBorderIcon/>
+        <Fab size="medium" onClick={() => toggleFavoriteStatus(tableProps.row.index, tableProps.row.original.item.favorite_status)}>
+        {tableProps.row.original.item.favorite_status ? <FavoriteIcon/> : <FavoriteBorderIcon/> }
         </Fab>),
       accessor: "item.favorite_status",
     }
   ], []);
+
+  
 
   const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} 
   = useTable({columns, data: tableData});
