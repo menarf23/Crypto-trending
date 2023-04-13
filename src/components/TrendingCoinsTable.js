@@ -11,6 +11,7 @@ import {useTable} from "react-table";
 function TrendingCoinsTable() {
 
   const [trendingCoins, setTrendingCoins] = useState([]);
+  const [favoriteCoins, setFavoriteCoins] = useState([]);
 
   
   useEffect(() => {
@@ -27,14 +28,29 @@ function TrendingCoinsTable() {
   }, []); 
   
 
-  console.log("List of trending coins: ", trendingCoins);
+  // console.log("List of trending coins: ", trendingCoins);
 
-  const tableData = useMemo(() => trendingCoins, [trendingCoins]);
-
-  function toggleFavoriteStatus(id) {
-    console.log(id);
-  }
   
+
+  function toggleFavoriteStatus(row) {
+    console.log(row);
+    const coinToUpdateIndex = trendingCoins.findIndex(coin => coin.item.coin_id === row.original.item.coin_id
+      );
+    const temporaryTrendingCoins = [...trendingCoins];
+    temporaryTrendingCoins[coinToUpdateIndex].item.favorite_status = !row.original.item.favorite_status;
+    setTrendingCoins(temporaryTrendingCoins);
+
+    const temporaryFavoriteCoins = temporaryTrendingCoins.filter (element => element.item.favorite_status === true);
+    setFavoriteCoins(temporaryFavoriteCoins);
+    // const temporaryCoins = [...trendingCoins];
+    // temporaryCoins[id].item.favorite_status = !trendingCoins[id].item.favorite_status;
+    // setTrendingCoins(temporaryCoins);
+  }
+
+  console.log("Favorite coins: ", favoriteCoins);
+  
+  
+  const tableData = useMemo(() => trendingCoins, [trendingCoins]);
   
   const columns = useMemo(() => [
     {
@@ -67,17 +83,21 @@ function TrendingCoinsTable() {
     {
       Header: "FAVORITE",
       Cell: tableProps => (
-        <Fab size="medium" onClick={() => toggleFavoriteStatus(tableProps.row.index)}>
+        <Fab size="medium" onClick={() => toggleFavoriteStatus(tableProps.row)}>
         {tableProps.row.original.item.favorite_status ? <FavoriteIcon/> : <FavoriteBorderIcon/> }
         </Fab>),
       accessor: "item.favorite_status",
     }
-  ], []);
+  ], [trendingCoins]);
+
+  
 
   
 
   const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} 
   = useTable({columns, data: tableData});
+
+  console.log("Rows: ", rows);
 
   return (
     <div>
