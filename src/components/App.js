@@ -1,13 +1,11 @@
 import './App.css';
-// import mockData from "./mock_data.json";
 import axios from 'axios';
 import TrendingCoinsTable from './TrendingCoinsTable';
-// import RawData from './RawData';
+import FavoriteCoinsTable from './FavoriteCoinsTable';
 import Header from './Header';
 import Footer from './Footer';
 import * as React from "react";
 import { useEffect, useState } from 'react';
-// import {useTable} from "react-table";
 
 function App() {
 
@@ -51,7 +49,7 @@ function App() {
       <Header />
       
       <TrendingCoinsTable trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/>
-
+      <FavoriteCoinsTable favCoins={favoriteCoins} favoriteStatus={toggleFavoriteStatus}/>
       
 
       <Footer />
