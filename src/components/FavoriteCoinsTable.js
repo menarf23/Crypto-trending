@@ -10,6 +10,8 @@ import {useTable} from "react-table";
 function FavoriteCoinsTable(props) {
 
   const favCoins = props.favCoins;
+  // const temporaryFavoriteCoins = temporaryTrendingCoins.filter (element => element.item.favorite_status === true);
+  // setFavoriteCoins(temporaryFavoriteCoins);
   
   
   const tableData = useMemo(() => favCoins, [favCoins]);
