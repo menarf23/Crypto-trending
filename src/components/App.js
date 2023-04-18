@@ -14,6 +14,7 @@ function App() {
   const [trendingCoins, setTrendingCoins] = useState([]);
   const favCoinsIDs = [];
   const [searchResults, setSearchResults] = useState([]);
+  const [isSearchActive, setSearchActive] = useState(false);
   
 
   useEffect(() => {
@@ -71,20 +72,25 @@ function App() {
     console.log("Searched term: ", searchedTerm);
   }
 
+  function toggleSearchState(textLength) {
+    textLength > 0 ? setSearchActive(true) : setSearchActive(false)
+  }
+
   return (
     <div className="App">
-      <Header />
-      <SearchBar onSearch={getSearchData} />
-      <TrendingCoinsTable 
-      trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/>
-      <SearchTable searchCoins={searchResults} />
-      
+      <header><Header /></header>
+      <SearchBar onSearch={getSearchData} searchState={toggleSearchState}/>
+      <div> {!isSearchActive ? <TrendingCoinsTable 
+      trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/> 
+      : <SearchTable searchCoins={searchResults} />}
+      </div>
+            
       <FavoriteCoinsTable 
       favCoins={trendingCoins.filter (element => element.item.favorite_status === true)} 
       favoriteStatus={toggleFavoriteStatus}/>
       
 
-      <Footer />
+      <footer><Footer /></footer>
     </div>
   );
 }

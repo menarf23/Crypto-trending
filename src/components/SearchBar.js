@@ -1,7 +1,6 @@
 import './App.css';
-import axios from 'axios';
 import * as React from "react";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 
 function SearchBar(props) {
@@ -9,7 +8,8 @@ function SearchBar(props) {
     const [searchText, setSearchText] = useState("");
 
     function handleChange(event) {
-        props.onSearch(event.target.value)
+        props.onSearch(event.target.value);
+        props.searchState(event.target.value.length);
         setSearchText(event.target.value);
     }
     
