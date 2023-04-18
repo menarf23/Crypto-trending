@@ -19,12 +19,12 @@ function TrendingCoinsTable(props) {
       Header: "IMAGE",
       Cell: tableProps => (
         <img
-          src={tableProps.row.original.item.small}
+          src={tableProps.row.original.item.large}
           width={50}
           alt='logo'
         />
       ),
-      accessor: "item.small",
+      accessor: "item.large ",
     },
     {
       Header: "NAME",

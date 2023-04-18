@@ -8,7 +8,8 @@ import { useEffect, useState } from 'react';
 function Coins() {
 
   const [trendingCoins, setTrendingCoins] = useState([]);
-  const favCoinsIDs = [];  
+  const favCoinsIDs = [];
+  
 
   useEffect(() => {
     axios.get(`https://api.coingecko.com/api/v3/search/trending`)
@@ -21,11 +22,11 @@ function Coins() {
 
       if (localStorage.getItem("FavCoinsIDs")) {
         originalCoins.forEach(element => {
-        if (localStorage.getItem("FavCoinsIDs").includes(element.item.id) ){
-          element.item.favorite_status = true;
-        }
-      });
-      }      
+          if (localStorage.getItem("FavCoinsIDs").includes(element.item.id) ){
+            element.item.favorite_status = true;
+          }
+        });
+      }
 
       console.log("Raw coins: ", response.data.coins);
       setTrendingCoins(originalCoins);
@@ -34,13 +35,12 @@ function Coins() {
 
   console.log("Trending Coins: ", trendingCoins);
 
-  
   function toggleFavoriteStatus(row) {
-    const coinToUpdateIndex = trendingCoins.findIndex(coin => coin.item.coin_id === row.original.item.coin_id
-      );
+    const coinToUpdateIndex = trendingCoins.findIndex(coin => coin.item.coin_id === row.original.item.coin_id);
     const temporaryTrendingCoins = [...trendingCoins];
     temporaryTrendingCoins[coinToUpdateIndex].item.favorite_status = !row.original.item.favorite_status;
     setTrendingCoins(temporaryTrendingCoins);
+
 
     temporaryTrendingCoins.forEach(element => {
       if (element.item.favorite_status === true) {

@@ -10,8 +10,6 @@ import {useTable} from "react-table";
 function FavoriteCoinsTable(props) {
 
   const favCoins = props.favCoins;
-  // const temporaryFavoriteCoins = temporaryTrendingCoins.filter (element => element.item.favorite_status === true);
-  // setFavoriteCoins(temporaryFavoriteCoins);
   
   
   const tableData = useMemo(() => favCoins, [favCoins]);
@@ -21,12 +19,12 @@ function FavoriteCoinsTable(props) {
       Header: "IMAGE",
       Cell: tableProps => (
         <img
-          src={tableProps.row.original.item.small}
+          src={tableProps.row.original.item.large}
           width={50}
           alt='logo'
         />
       ),
-      accessor: "item.small",
+      accessor: "item.large",
     },
     {
       Header: "NAME",
