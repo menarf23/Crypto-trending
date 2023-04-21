@@ -15,7 +15,6 @@ function App() {
   const favCoinsIDs = [];
   const [searchResults, setSearchResults] = useState([]);
   const [isSearchActive, setSearchActive] = useState(false);
-  
 
   useEffect(() => {
     axios.get(`https://api.coingecko.com/api/v3/search/trending`)
@@ -40,6 +39,7 @@ function App() {
   }, []); 
 
   console.log("Trending Coins: ", trendingCoins);
+  console.log("Search Coins: ", searchResults);
 
   function toggleFavoriteStatus(row) {
     const coinToUpdateIndex = trendingCoins.findIndex(coin => coin.item.coin_id === row.original.item.coin_id);
@@ -71,6 +71,8 @@ function App() {
 
     console.log("Searched term: ", searchedTerm);
   }
+
+  // setTimeout(getSearchData,2000);
 
   function toggleSearchState(textLength) {
     textLength > 0 ? setSearchActive(true) : setSearchActive(false)

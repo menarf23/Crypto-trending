@@ -1,7 +1,7 @@
 import './App.css';
 import * as React from "react";
 import { useMemo } from 'react';
-import {useTable} from "react-table";
+import {useTable, usePagination} from "react-table";
 
 function SearchTable(props) {
 
@@ -40,10 +40,12 @@ function SearchTable(props) {
   
     
   
-    const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} 
-    = useTable({columns, data: tableData});
+    const {getTableProps, getTableBodyProps, headerGroups, 
+      page, nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, state, 
+      gotoPage, pageCount, setPageSize, prepareRow} 
+    = useTable({columns, data: tableData}, usePagination);
   
-    // console.log("Rows: ", rows);
+    const {pageIndex, pageSize} = state;
   
     return (
       <div>
@@ -61,7 +63,7 @@ function SearchTable(props) {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
+              {page.map((row) => {
                 prepareRow(row)
                 return (
                   <tr {...row.getRowProps()}>
@@ -75,6 +77,37 @@ function SearchTable(props) {
               })}
             </tbody>
           </table>
+          <div>
+            <span>
+              Page{" "}
+              <strong>
+                {pageIndex + 1} of {pageOptions.length}
+              </strong>{" "}
+            </span>
+            <span>
+              | Go to page: {" "}
+              <input type='number' defaultValue={pageIndex + 1} 
+              onChange={e => {
+                const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+                gotoPage(pageNumber)
+              }}
+                style={{width: "50px"}}
+              />
+            </span>
+            <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+              {
+                [5,10,20].map(pageSize => (
+                  <option key={pageSize} value={pageSize}>
+                    Show {pageSize}
+                  </option>
+                ))
+              }
+            </select>
+            <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button>
+            <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+            <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+            <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button>
+          </div>
         </div>
       </div>
     );
