@@ -1,13 +1,15 @@
 import './App.css';
 import axios from 'axios';
 import SearchBar from './SearchBar';
-import TrendingCoinsTable from './TrendingCoinsTable';
+// import TrendingCoinsTable from './TrendingCoinsTable';
 import FavoriteCoinsTable from './FavoriteCoinsTable';
-import SearchTable from './SearchTable';
+import Home from "./Home";
+// import SearchTable from './SearchTable';
 import Header from './Header';
 import Footer from './Footer';
 import * as React from "react";
 import { useEffect, useState } from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
 
 function App() {
 
@@ -72,7 +74,6 @@ function App() {
     console.log("Searched term: ", searchedTerm);
   }
 
-  // setTimeout(getSearchData,2000);
 
   function toggleSearchState(textLength) {
     textLength > 0 ? setSearchActive(true) : setSearchActive(false)
@@ -81,15 +82,34 @@ function App() {
   return (
     <div className="App">
       <header><Header /></header>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/favorites">Favorite Coins</Link>
+          </li>
+        </ul>
+      </nav>
+
       <SearchBar onSearch={getSearchData} searchState={toggleSearchState}/>
-      <div> {!isSearchActive ? <TrendingCoinsTable 
+
+      <Routes>
+        <Route path="/"  element={<Home searchStatus={!isSearchActive} trendCoins={trendingCoins} 
+        favoriteStatus={toggleFavoriteStatus} searchCoins={searchResults}/>}/>
+        
+        <Route path="/favorites"  element={<FavoriteCoinsTable favCoins={trendingCoins.filter (element => element.item.favorite_status === true)} 
+        favoriteStatus={toggleFavoriteStatus}/>} />
+      </Routes>
+      
+      
+      {/* <div> {!isSearchActive ? <TrendingCoinsTable 
       trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/> 
       : <SearchTable searchCoins={searchResults} />}
-      </div>
+      </div> */}
             
-      <FavoriteCoinsTable 
-      favCoins={trendingCoins.filter (element => element.item.favorite_status === true)} 
-      favoriteStatus={toggleFavoriteStatus}/>
+      
       
 
       <footer><Footer /></footer>
