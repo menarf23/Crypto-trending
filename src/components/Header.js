@@ -1,9 +1,9 @@
 import React from "react";
 
-function Header() {
+function Header(props) {
     return (
         <header className="App-header">
-            <h1>Trending Cryptocurrencies</h1>
+            <h1>{props.name}</h1>
         </header>
     )
     
