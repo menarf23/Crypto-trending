@@ -15,7 +15,6 @@ function Favorites() {
   useEffect(() => {
     axios.get(`https://api.coingecko.com/api/v3/search/trending`)
     .then(response => {
-      console.log("Raw data: ", response);
       const originalCoins = response.data.coins;
       originalCoins.forEach(element => {
         element.item.favorite_status = false;
@@ -28,13 +27,9 @@ function Favorites() {
           }
         });
       }
-
-      console.log("Raw coins: ", response.data.coins);
       setTrendingCoins(originalCoins);
     });
   }, []); 
-
-  console.log("Trending Coins: ", trendingCoins);
 
   function toggleFavoriteStatus(row) {
     const coinToUpdateIndex = trendingCoins.findIndex(coin => coin.item.coin_id === row.original.item.coin_id);
@@ -49,8 +44,6 @@ function Favorites() {
       }
       localStorage.setItem("FavCoinsIDs", favCoinsIDs );
     });
-
-    console.log("Favorite Coins IDs: ", favCoinsIDs);
   }
   
 
@@ -68,13 +61,10 @@ function Favorites() {
         </ul>
       </nav>
 
-
       <FavoriteCoinsTable 
         favCoins={trendingCoins.filter (element => element.item.favorite_status === true)} 
         favoriteStatus={toggleFavoriteStatus}/>
             
-      
-
       <footer><Footer /></footer>
     </div>
   );

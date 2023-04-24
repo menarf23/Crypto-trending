@@ -8,7 +8,7 @@ import Footer from './Footer';
 import * as React from "react";
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { debounce } from "lodash";
 function Home() {
 
   const [trendingCoins, setTrendingCoins] = useState([]);
@@ -47,7 +47,6 @@ function Home() {
     temporaryTrendingCoins[coinToUpdateIndex].item.favorite_status = !row.original.item.favorite_status;
     setTrendingCoins(temporaryTrendingCoins);
 
-
     temporaryTrendingCoins.forEach(element => {
       if (element.item.favorite_status === true) {
         favCoinsIDs.push(element.item.id);
@@ -59,19 +58,19 @@ function Home() {
   }
 
   function getSearchData(searchedTerm) {
-    axios.get(`https://api.coingecko.com/api/v3/search?query=${searchedTerm}`)
-    .then(response => {   
-      if (searchedTerm.length > 0) {
+
+    if (searchedTerm.length > 0) {
+      axios.get(`https://api.coingecko.com/api/v3/search?query=${searchedTerm}`)
+      .then(response => {
         setSearchResults(response.data.coins);
-      }
-      else {
-        setSearchResults([]);
-      }
-    });
+      });
+    }
+    else {
+      setSearchResults([]);
+    }
 
     console.log("Searched term: ", searchedTerm);
   }
-
 
   function toggleSearchState(textLength) {
     textLength > 0 ? setSearchActive(true) : setSearchActive(false)
@@ -91,16 +90,13 @@ function Home() {
         </ul>
       </nav>
 
-      <SearchBar onSearch={getSearchData} searchState={toggleSearchState}/>
-      
+      <SearchBar onSearch={debounce(getSearchData, 500)} searchState={toggleSearchState}/>
       
       <div> {!isSearchActive ? <TrendingCoinsTable 
       trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/> 
       : <SearchTable searchCoins={searchResults} />}
       </div>         
       
-      
-
       <footer><Footer /></footer>
     </div>
   );
