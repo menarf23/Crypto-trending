@@ -1,14 +1,13 @@
-import './App.css';
-import axios from 'axios';
-import SearchBar from './SearchBar';
-import TrendingCoinsTable from './TrendingCoinsTable';
-import SearchTable from './SearchTable';
-import Header from './Header';
-import Footer from './Footer';
+import axios from "axios";
+import SearchBar from "./SearchBar";
+import TrendingCoinsTable from "./TrendingCoinsTable";
+import SearchTable from "./SearchTable";
+import Header from "./Header";
 import * as React from "react";
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { debounce } from "lodash";
+
 function Home() {
 
   const [trendingCoins, setTrendingCoins] = useState([]);
@@ -77,7 +76,7 @@ function Home() {
   }
 
   return (
-    <div className="App">
+    <div className="Home_page">
       <header><Header name="Trending Cryptocurrencies" /></header>
       <nav>
         <ul>
@@ -85,7 +84,7 @@ function Home() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/Favorites_page">Favorite Coins</Link>
+            <Link to="/Favorites">Favorite Coins</Link>
           </li>
         </ul>
       </nav>
@@ -97,7 +96,6 @@ function Home() {
       : <SearchTable searchCoins={searchResults} />}
       </div>         
       
-      <footer><Footer /></footer>
     </div>
   );
 }

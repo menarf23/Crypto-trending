@@ -1,10 +1,10 @@
-import './App.css';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import Fab from '@mui/material/Fab';
-import axios from 'axios';
+import "./App.css";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Fab from "@mui/material/Fab";
+import axios from "axios";
 import * as React from "react";
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from "react";
 import {useTable} from "react-table";
 
 
@@ -59,7 +59,7 @@ function TrendingCoinsTable() {
         <img
           src={tableProps.row.original.item.small}
           width={50}
-          alt='logo'
+          alt="logo"
         />
       ),
       accessor: "item.small",
@@ -101,7 +101,7 @@ function TrendingCoinsTable() {
 
   return (
     <div>
-        <div className='container'>
+        <div className="container">
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (

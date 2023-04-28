@@ -1,9 +1,9 @@
-import './App.css';
-import axios from 'axios';
-import TrendingCoinsTable from './TrendingCoinsTable';
-import FavoriteCoinsTable from './FavoriteCoinsTable';
+// import "./App.css";
+import axios from "axios";
+import TrendingCoinsTable from "./TrendingCoinsTable";
+import FavoriteCoinsTable from "./FavoriteCoinsTable";
 import * as React from "react";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 function Coins() {
 

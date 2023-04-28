@@ -1,121 +1,20 @@
-import './App.css';
-// import axios from 'axios';
-// import SearchBar from './SearchBar';
-// import TrendingCoinsTable from './TrendingCoinsTable';
-// import FavoriteCoinsTable from './FavoriteCoinsTable';
+import "./App.css";
 import Home from "./Home_page";
-import Favorites from "./Favorites_page";
-// import SearchTable from './SearchTable';
-// import Header from './Header';
-// import Footer from './Footer';
+import Favorites from "./Favorites";
+import Footer from "./Footer";
 import * as React from "react";
-// import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
 function App() {
 
-  // const [trendingCoins, setTrendingCoins] = useState([]);
-  // const favCoinsIDs = [];
-  // const [searchResults, setSearchResults] = useState([]);
-  // const [isSearchActive, setSearchActive] = useState(false);
-
-  // useEffect(() => {
-  //   axios.get(`https://api.coingecko.com/api/v3/search/trending`)
-  //   .then(response => {
-  //     console.log("Raw data: ", response);
-  //     const originalCoins = response.data.coins;
-  //     originalCoins.forEach(element => {
-  //       element.item.favorite_status = false;
-  //     });
-
-  //     if (localStorage.getItem("FavCoinsIDs")) {
-  //       originalCoins.forEach(element => {
-  //         if (localStorage.getItem("FavCoinsIDs").includes(element.item.id) ){
-  //           element.item.favorite_status = true;
-  //         }
-  //       });
-  //     }
-
-  //     console.log("Raw coins: ", response.data.coins);
-  //     setTrendingCoins(originalCoins);
-  //   });
-  // }, []); 
-
-  // console.log("Trending Coins: ", trendingCoins);
-  // console.log("Search Coins: ", searchResults);
-
-  // function toggleFavoriteStatus(row) {
-  //   const coinToUpdateIndex = trendingCoins.findIndex(coin => coin.item.coin_id === row.original.item.coin_id);
-  //   const temporaryTrendingCoins = [...trendingCoins];
-  //   temporaryTrendingCoins[coinToUpdateIndex].item.favorite_status = !row.original.item.favorite_status;
-  //   setTrendingCoins(temporaryTrendingCoins);
-
-
-  //   temporaryTrendingCoins.forEach(element => {
-  //     if (element.item.favorite_status === true) {
-  //       favCoinsIDs.push(element.item.id);
-  //     }
-  //     localStorage.setItem("FavCoinsIDs", favCoinsIDs );
-  //   });
-
-  //   console.log("Favorite Coins IDs: ", favCoinsIDs);
-  // }
-
-  // function getSearchData(searchedTerm) {
-  //   axios.get(`https://api.coingecko.com/api/v3/search?query=${searchedTerm}`)
-  //   .then(response => {   
-  //     if (searchedTerm.length > 0) {
-  //       setSearchResults(response.data.coins);
-  //     }
-  //     else {
-  //       setSearchResults([]);
-  //     }
-  //   });
-
-  //   console.log("Searched term: ", searchedTerm);
-  // }
-
-
-  // function toggleSearchState(textLength) {
-  //   textLength > 0 ? setSearchActive(true) : setSearchActive(false)
-  // }
-
   return (
     <div className="App">
-      {/* <header><Header /></header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/favorites">Favorite Coins</Link>
-          </li>
-        </ul>
-      </nav> */}
-
-      {/* <SearchBar onSearch={getSearchData} searchState={toggleSearchState}/> */}
-
       <Routes>
         <Route path="/"  element={<Home />}/>
         
-        <Route path="/Favorites_page"  element={<Favorites />} />
+        <Route path="/Favorites"  element={<Favorites />} />
       </Routes>
-      
-      
-      {/* <div> {!isSearchActive ? <TrendingCoinsTable 
-      trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/> 
-      : <SearchTable searchCoins={searchResults} />}
-      </div>
-
-      <FavoriteCoinsTable 
-        favCoins={trendingCoins.filter (element => element.item.favorite_status === true)} 
-        favoriteStatus={toggleFavoriteStatus}/>
-            
-      
-      
-
-      <footer><Footer /></footer> */}
+      <footer><Footer /></footer>
     </div>
   );
 }

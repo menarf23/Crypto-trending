@@ -1,6 +1,5 @@
-import './App.css';
 import * as React from "react";
-import { useMemo } from 'react';
+import { useMemo } from "react";
 import {useTable, usePagination} from "react-table";
 
 function SearchTable(props) {
@@ -17,7 +16,7 @@ function SearchTable(props) {
           <img
             src={tableProps.row.original.large}
             width={50}
-            alt='logo'
+            alt="logo"
           />
         ),
         accessor: "large",
@@ -49,7 +48,7 @@ function SearchTable(props) {
   
     return (
       <div>
-          <div className='container'>
+          <div className="container">
           <table {...getTableProps()}>
             <thead>
               {headerGroups.map((headerGroup) => (
@@ -86,7 +85,7 @@ function SearchTable(props) {
             </span>
             <span>
               | Go to page: {" "}
-              <input type='number' defaultValue={pageIndex + 1} 
+              <input type="number" defaultValue={pageIndex + 1} 
               onChange={e => {
                 const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
                 gotoPage(pageNumber)

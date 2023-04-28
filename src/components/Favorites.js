@@ -1,11 +1,9 @@
-import './App.css';
-import axios from 'axios';
-import FavoriteCoinsTable from './FavoriteCoinsTable';
-import Header from './Header';
-import Footer from './Footer';
+import axios from "axios";
+import FavoriteCoinsTable from "./FavoriteCoinsTable";
+import Header from "./Header";
 import * as React from "react";
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Favorites() {
 
@@ -56,7 +54,7 @@ function Favorites() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/Favorites_page">Favorite Coins</Link>
+            <Link to="/Favorites">Favorite Coins</Link>
           </li>
         </ul>
       </nav>
@@ -65,7 +63,6 @@ function Favorites() {
         favCoins={trendingCoins.filter (element => element.item.favorite_status === true)} 
         favoriteStatus={toggleFavoriteStatus}/>
             
-      <footer><Footer /></footer>
     </div>
   );
 }
