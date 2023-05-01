@@ -43,7 +43,6 @@ function Favorites() {
       localStorage.setItem("FavCoinsIDs", favCoinsIDs );
     });
   }
-  
 
   return (
     <div className="Favorites_page">

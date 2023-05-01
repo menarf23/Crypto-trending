@@ -17,7 +17,17 @@
 nav ul {
   text-align: center;
   list-style-type: none;
+  padding: 0;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* .SearchBar {
+  text-align: center;
+} */
 
 /* 
 footer {

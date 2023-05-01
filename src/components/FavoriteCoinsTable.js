@@ -1,9 +1,10 @@
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Fab from "@mui/material/Fab";
 import * as React from "react";
 import { useMemo } from "react";
 import {useTable} from "react-table";
+import { red } from "@mui/material/colors";
+
 
 
 function FavoriteCoinsTable(props) {
@@ -45,7 +46,7 @@ function FavoriteCoinsTable(props) {
       Header: "FAVORITE",
       Cell: tableProps => (
         <Fab size="medium" onClick={() => props.favoriteStatus(tableProps.row)}>
-        {tableProps.row.original.item.favorite_status ? <FavoriteIcon/> : <FavoriteBorderIcon/> }
+        <FavoriteIcon style={{color: red[900]}}/>
         </Fab>),
       accessor: "item.favorite_status",
     }
@@ -89,7 +90,6 @@ function FavoriteCoinsTable(props) {
       </div>
     </div>
   );
-
 
 }
 

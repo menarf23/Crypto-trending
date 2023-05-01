@@ -1,10 +1,10 @@
-// import "./App.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Fab from "@mui/material/Fab";
 import * as React from "react";
 import { useMemo } from "react";
 import {useTable} from "react-table";
+import { red } from "@mui/material/colors";
 
 
 function TrendingCoinsTable(props) {
@@ -46,15 +46,12 @@ function TrendingCoinsTable(props) {
       Header: "FAVORITE",
       Cell: tableProps => (
         <Fab size="medium" onClick={() => props.favoriteStatus(tableProps.row)}>
-        {tableProps.row.original.item.favorite_status ? <FavoriteIcon/> : <FavoriteBorderIcon/> }
+        {tableProps.row.original.item.favorite_status ? <FavoriteIcon style={{color: red[900]}}/> : <FavoriteBorderIcon style={{color: red[900]}}/> }
         </Fab>),
       accessor: "item.favorite_status",
     }
   ], [trendCoins]);
 
-  
-
-  
 
   const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} 
   = useTable({columns, data: tableData});

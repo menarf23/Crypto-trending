@@ -34,10 +34,7 @@ function SearchTable(props) {
         accessor: "market_cap_rank",
       }
     ], [searchCoins]);
-  
-    
-  
-    
+   
   
     const {getTableProps, getTableBodyProps, headerGroups, 
       page, nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, state, 

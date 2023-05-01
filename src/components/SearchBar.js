@@ -1,4 +1,3 @@
-// import "./App.css";
 import * as React from "react";
 import { useState } from "react";
 
@@ -12,7 +11,6 @@ function SearchBar(props) {
         props.searchState(event.target.value.length);
         setSearchText(event.target.value);
     }
-    
 
     return(
         <div className="SearchBar">

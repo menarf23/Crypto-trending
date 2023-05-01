@@ -77,16 +77,10 @@ function Home() {
 
   return (
     <div className="Home_page">
-      <header><Header name="Trending Cryptocurrencies" /></header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/Favorites">Favorite Coins</Link>
-          </li>
-        </ul>
+      <header><Header name="Trending Cryptocurrencies"/></header>
+      <nav className="navbar">
+        <Link to="/">Home</Link>
+        <Link to="/Favorites">Favorite Coins</Link>
       </nav>
 
       <SearchBar onSearch={debounce(getSearchData, 500)} searchState={toggleSearchState}/>
