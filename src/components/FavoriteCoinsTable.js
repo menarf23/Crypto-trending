@@ -58,8 +58,7 @@ function FavoriteCoinsTable(props) {
   // console.log("Rows: ", rows);
 
   return (
-    <div>
-        <div className="container">
+      <div className="favorites-table">
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
@@ -88,7 +87,6 @@ function FavoriteCoinsTable(props) {
           </tbody>
         </table>
       </div>
-    </div>
   );
 
 }

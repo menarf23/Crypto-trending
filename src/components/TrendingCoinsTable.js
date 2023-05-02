@@ -45,7 +45,7 @@ function TrendingCoinsTable(props) {
     {
       Header: "FAVORITE",
       Cell: tableProps => (
-        <Fab size="medium" onClick={() => props.favoriteStatus(tableProps.row)}>
+        <Fab size="small" onClick={() => props.favoriteStatus(tableProps.row)}>
         {tableProps.row.original.item.favorite_status ? <FavoriteIcon style={{color: red[900]}}/> : <FavoriteBorderIcon style={{color: red[900]}}/> }
         </Fab>),
       accessor: "item.favorite_status",
@@ -59,10 +59,9 @@ function TrendingCoinsTable(props) {
   // console.log("Rows: ", rows);
 
   return (
-    <div>
-        <div className="container">
+      <div className="trending-table">
         <table {...getTableProps()}>
-          <thead>
+          <thead >
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
@@ -89,7 +88,6 @@ function TrendingCoinsTable(props) {
           </tbody>
         </table>
       </div>
-    </div>
   );
 
 

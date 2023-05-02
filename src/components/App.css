@@ -4,20 +4,23 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #26001B;
   min-height: 10vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   font-size: calc(10px + 2vmin);
-  color: yellow;
+  color: #ffeb3b;
 }
 
-nav ul {
-  text-align: center;
-  list-style-type: none;
-  padding: 0;
+.header-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 80px;
+  border: 3px solid #ffeb3b;
+  border-radius: 10%;
 }
 
 .navbar {
@@ -25,16 +28,63 @@ nav ul {
   justify-content: space-evenly;
 }
 
-/* .SearchBar {
-  text-align: center;
-} */
+.trending-table {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-/* 
+tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+tbody tr:hover {
+  background-color: #00918E;
+  color: white;
+}
+
+th {
+  background-color: bisque;
+  border-top: 1px solid black;
+  font-weight: 700;
+  width: 100px;
+}
+
+td {
+  /* display: flex;
+  justify-content: center; */
+  border-top: 1px solid black;
+  width: 150px;
+  font-weight: 500;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.favorites-table {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-table {
+  display: flex;
+  justify-content: center;
+}
+
+.SearchBar {
+  text-align: center;
+  margin: 20px;
+}
+
+
 footer {
+  margin-top: 50px;
   position: relative;
   text-align: center;
   bottom: 0;
   width: 100%;
-} */
+}
 
 

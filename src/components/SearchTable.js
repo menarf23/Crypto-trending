@@ -44,8 +44,8 @@ function SearchTable(props) {
     const {pageIndex, pageSize} = state;
   
     return (
-      <div>
-          <div className="container">
+      <div className="search-table">
+          <div >
           <table {...getTableProps()}>
             <thead>
               {headerGroups.map((headerGroup) => (

@@ -3,7 +3,6 @@ import FavoriteCoinsTable from "./FavoriteCoinsTable";
 import Header from "./Header";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 function Favorites() {
 
@@ -47,16 +46,6 @@ function Favorites() {
   return (
     <div className="Favorites_page">
       <header><Header name="Favorite Cryptocurrencies" /></header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/Favorites">Favorite Coins</Link>
-          </li>
-        </ul>
-      </nav>
 
       <FavoriteCoinsTable 
         favCoins={trendingCoins.filter (element => element.item.favorite_status === true)} 

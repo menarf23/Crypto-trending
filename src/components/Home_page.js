@@ -5,7 +5,6 @@ import SearchTable from "./SearchTable";
 import Header from "./Header";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { debounce } from "lodash";
 
 function Home() {
@@ -78,18 +77,12 @@ function Home() {
   return (
     <div className="Home_page">
       <header><Header name="Trending Cryptocurrencies"/></header>
-      <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/Favorites">Favorite Coins</Link>
-      </nav>
 
-      <SearchBar onSearch={debounce(getSearchData, 500)} searchState={toggleSearchState}/>
+      <SearchBar onSearch={debounce(getSearchData, 700)} searchState={toggleSearchState}/>
       
-      <div> {!isSearchActive ? <TrendingCoinsTable 
-      trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/> 
+      {!isSearchActive ? <TrendingCoinsTable trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/> 
       : <SearchTable searchCoins={searchResults} />}
-      </div>         
-      
+              
     </div>
   );
 }
