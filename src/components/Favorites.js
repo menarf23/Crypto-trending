@@ -31,16 +31,27 @@ function Favorites() {
   function toggleFavoriteStatus(row) {
     const coinToUpdateIndex = trendingCoins.findIndex(coin => coin.item.coin_id === row.original.item.coin_id);
     const temporaryTrendingCoins = [...trendingCoins];
+
+    temporaryTrendingCoins.forEach(element => {
+      if (localStorage.getItem("FavCoinsIDs").includes(element.item.id) ){
+        element.item.favorite_status = true;
+      }
+      else {
+        element.item.favorite_status = false;
+      }
+    });      
+    
     temporaryTrendingCoins[coinToUpdateIndex].item.favorite_status = !row.original.item.favorite_status;
     setTrendingCoins(temporaryTrendingCoins);
 
-
-    temporaryTrendingCoins.forEach(element => {
+    trendingCoins.forEach(element => {
       if (element.item.favorite_status === true) {
         favCoinsIDs.push(element.item.id);
       }
       localStorage.setItem("FavCoinsIDs", favCoinsIDs );
     });
+
+    console.log("Favorite Coins IDs: ", favCoinsIDs);
   }
 
   return (

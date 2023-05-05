@@ -16,18 +16,17 @@ function FavoriteCoinsTable(props) {
   
   const columns = useMemo(() => [
     {
-      Header: "IMAGE",
+      Header: "",
       Cell: tableProps => (
         <img
-          src={tableProps.row.original.item.large}
-          width={50}
+          src={tableProps.row.original.item.small}
           alt="logo"
         />
       ),
       accessor: "item.large",
     },
     {
-      Header: "NAME",
+      Header: "COIN",
       accessor: "item.name",
     },
     {
@@ -35,18 +34,21 @@ function FavoriteCoinsTable(props) {
       accessor: "item.symbol",
     },
     {
-      Header: "MARKET CAP RANK",
+      Header: "MKT CAP #",
       accessor: "item.market_cap_rank",
     },
     {
       Header: "PRICE BTC",
+      Cell: tableProps => (
+        tableProps.row.original.item.price_btc.toExponential(5)
+      ),
       accessor: "item.price_btc",
     },
     {
       Header: "FAVORITE",
       Cell: tableProps => (
-        <Fab size="medium" onClick={() => props.favoriteStatus(tableProps.row)}>
-        <FavoriteIcon style={{color: red[900]}}/>
+        <Fab className="favFab" size="medium" onClick={() => props.favoriteStatus(tableProps.row)}>
+        <FavoriteIcon className="favIcon" style={{color: red[900]}}/>
         </Fab>),
       accessor: "item.favorite_status",
     }

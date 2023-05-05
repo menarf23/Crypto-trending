@@ -8,14 +8,14 @@ function Header(props) {
     return (
         <header className="App-header">
             <Link style={{color: yellow[500]}} to="/"> 
-                <div className="header-button">
-                    <HomeIcon style={{fontSize: "3rem"}} />
+                <div title="Home" className="header-button">
+                    <HomeIcon className="header-icon" style={{fontSize: "48px"}} />
                 </div>
             </Link>
                 <h1>{props.name}</h1>
             <Link style={{color: yellow[500]}} to="/Favorites">
-                <div className="header-button">
-                    <FavoriteIcon style={{fontSize: "3rem"}}/>
+                <div title="Favorites" className="header-button">
+                    <FavoriteIcon className="header-icon" style={{fontSize: "48px"}}/>
                  </div> 
             </Link>
         </header>

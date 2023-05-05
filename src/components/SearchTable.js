@@ -11,7 +11,7 @@ function SearchTable(props) {
     
     const columns = useMemo(() => [
       {
-        Header: "IMAGE",
+        Header: "",
         Cell: tableProps => (
           <img
             src={tableProps.row.original.large}
@@ -22,7 +22,7 @@ function SearchTable(props) {
         accessor: "large",
       },
       {
-        Header: "NAME",
+        Header: "COIN",
         accessor: "name",
       },
       {
@@ -30,7 +30,7 @@ function SearchTable(props) {
         accessor: "symbol",
       },
       {
-        Header: "MARKET CAP RANK",
+        Header: "MKT CAP #",
         accessor: "market_cap_rank",
       }
     ], [searchCoins]);
