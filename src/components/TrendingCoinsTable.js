@@ -91,8 +91,6 @@ function TrendingCoinsTable(props) {
         </table>
       </div>
   );
-
-
 }
 
 export default TrendingCoinsTable;

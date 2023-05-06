@@ -6,7 +6,6 @@ function SearchTable(props) {
 
     const searchCoins = props.searchCoins;
   
-  
     const tableData = useMemo(() => searchCoins, [searchCoins]);
     
     const columns = useMemo(() => [

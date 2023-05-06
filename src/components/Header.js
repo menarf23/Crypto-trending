@@ -20,7 +20,6 @@ function Header(props) {
             </Link>
         </header>
     )
-    
 }
 
 export default Header;

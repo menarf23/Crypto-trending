@@ -11,7 +11,6 @@ function FavoriteCoinsTable(props) {
 
   const favCoins = props.favCoins;
   
-  
   const tableData = useMemo(() => favCoins, [favCoins]);
   
   const columns = useMemo(() => [
@@ -57,7 +56,6 @@ function FavoriteCoinsTable(props) {
   const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} 
   = useTable({columns, data: tableData});
 
-  // console.log("Rows: ", rows);
 
   return (
       <div className="favorites-table">
@@ -90,7 +88,6 @@ function FavoriteCoinsTable(props) {
         </table>
       </div>
   );
-
 }
 
 export default FavoriteCoinsTable;
