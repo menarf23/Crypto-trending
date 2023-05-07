@@ -7,9 +7,9 @@ function SearchBar(props) {
     const [searchText, setSearchText] = useState("");
 
     function handleChange(event) {
+        setSearchText(event.target.value);
         props.onSearch(event.target.value);
         props.searchState(event.target.value.length);
-        setSearchText(event.target.value);
     }
 
     return(

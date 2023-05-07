@@ -4,7 +4,7 @@ import TrendingCoinsTable from "./TrendingCoinsTable";
 import SearchTable from "./SearchTable";
 import Header from "./Header";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { debounce } from "lodash";
 
 function Home() {
@@ -34,7 +34,6 @@ function Home() {
         localStorage.setItem("FavCoinsIDs", favCoinsIDs );
       }
 
-      console.log("Raw coins: ", response.data.coins);
       setTrendingCoins(originalCoins);
     });
   }, []); 
@@ -83,6 +82,10 @@ function Home() {
     console.log("Searched term: ", searchedTerm);
   }
 
+  const debouncedOnSearch = useMemo(
+    () => debounce(getSearchData, 300), []
+    );
+
   function toggleSearchState(textLength) {
     textLength > 0 ? setSearchActive(true) : setSearchActive(false)
   }
@@ -91,7 +94,7 @@ function Home() {
     <div className="Home_page">
       <header><Header name="Trending Cryptocurrencies"/></header>
 
-      <SearchBar onSearch={debounce(getSearchData, 500)} searchState={toggleSearchState}/>
+      <SearchBar onSearch={debouncedOnSearch} searchState={toggleSearchState}/>
       
       {!isSearchActive ? <TrendingCoinsTable trendCoins={trendingCoins} favoriteStatus={toggleFavoriteStatus}/> 
       : <SearchTable searchCoins={searchResults} />}
