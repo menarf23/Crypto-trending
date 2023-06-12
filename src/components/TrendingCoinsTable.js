@@ -1,9 +1,9 @@
+import * as React from "react";
+import { useMemo } from "react";
+import {useTable, usePagination} from "react-table";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Fab from "@mui/material/Fab";
-import * as React from "react";
-import { useMemo } from "react";
-import {useTable} from "react-table";
 import { red } from "@mui/material/colors";
 
 
@@ -11,12 +11,11 @@ function TrendingCoinsTable(props) {
 
   const trendCoins = props.trendCoins;
   
-  
   const tableData = useMemo(() => trendCoins, [trendCoins]);
   
   const columns = useMemo(() => [
     {
-      Header: "",
+      Header: '',
       Cell: tableProps => (
         <img
           src={tableProps.row.original.item.small}
@@ -26,26 +25,26 @@ function TrendingCoinsTable(props) {
       accessor: "item.large ",
     },
     {
-      Header: "COIN",
+      Header: 'COIN',
       accessor: "item.name",
     },
     {
-      Header: "SYMBOL",
+      Header: 'SYMBOL',
       accessor: "item.symbol",
     },
     {
-      Header: "MKT CAP #",
+      Header: 'MKT CAP #',
       accessor: "item.market_cap_rank",
     },
     {
-      Header: "PRICE BTC",
+      Header: 'PRICE BTC',
       Cell: tableProps => (
         tableProps.row.original.item.price_btc.toExponential(5)
       ),
       accessor: "item.price_btc",
     },
     {
-      Header: "FAVORITE",
+      Header: 'FAVORITE',
       Cell: tableProps => (
         <Fab className="favFab" size="medium" onClick={() => props.favoriteStatus(tableProps.row)}>
         {tableProps.row.original.item.favorite_status ? <FavoriteIcon className="favIcon" style={{color: red[900]}}/> : <FavoriteBorderIcon className="favIcon" style={{color: red[900]}}/> }
@@ -55,15 +54,18 @@ function TrendingCoinsTable(props) {
   ], [trendCoins]);
 
 
-  const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} 
-  = useTable({columns, data: tableData});
+  const {getTableProps, getTableBodyProps, headerGroups, page, 
+    nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, state, 
+    gotoPage, pageCount, prepareRow} 
+  = useTable({columns, data: tableData, initialState: { pageSize: 20 } }, usePagination);
 
-  // console.log("Rows: ", rows);
+  const {pageIndex} = state;
 
   return (
       <div className="trending-table">
+        <div >
         <table {...getTableProps()}>
-          <thead >
+          <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
@@ -75,7 +77,7 @@ function TrendingCoinsTable(props) {
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {page.map((row) => {
               prepareRow(row)
               return (
                 <tr {...row.getRowProps()}>
@@ -89,6 +91,30 @@ function TrendingCoinsTable(props) {
             })}
           </tbody>
         </table>
+        {trendCoins.length > 20 ? 
+          <div>
+            <span>
+              Page{" "}
+              <strong>
+                {pageIndex + 1} of {pageOptions.length}
+              </strong>{" "}
+            </span>
+            <span style={{margin:10}}>
+              |  Go to page: {" "}
+              <input type="number" defaultValue={pageIndex + 1} 
+              onChange={e => {
+                const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+                gotoPage(pageNumber)
+              }}
+                style={{width: "50px"}}
+              />
+            </span>
+            <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button>
+            <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+            <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+            <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button>
+          </div> : null}
+          </div>
       </div>
   );
 }

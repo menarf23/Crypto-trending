@@ -1,9 +1,11 @@
+import * as React from "react";
+import { Route, Routes } from "react-router-dom";
+
 import "./App.css";
 import Home from "./Home";
 import Favorites from "./Favorites";
 import Footer from "./Footer";
-import * as React from "react";
-import { Route, Routes } from "react-router-dom";
+
 
 function App() {
 

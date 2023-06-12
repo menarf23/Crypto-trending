@@ -16,7 +16,6 @@ function SearchBar(props) {
         <div>
             <input className="SearchBar" onChange={handleChange} value={searchText} placeholder="Search for cryptocurrencies..." />
         </div>
-
     );
 }
 

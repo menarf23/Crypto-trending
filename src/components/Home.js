@@ -1,11 +1,13 @@
 import axios from "axios";
-import SearchBar from "./SearchBar";
-import TrendingCoinsTable from "./TrendingCoinsTable";
-import SearchTable from "./SearchTable";
-import Header from "./Header";
 import * as React from "react";
 import { useEffect, useState, useMemo } from "react";
 import { debounce } from "lodash";
+
+import Header from "./Header";
+import TrendingCoinsTable from "./TrendingCoinsTable";
+import SearchBar from "./SearchBar";
+import SearchTable from "./SearchTable";
+
 
 function Home() {
 
@@ -17,7 +19,7 @@ function Home() {
   useEffect(() => {
     axios.get(`https://api.coingecko.com/api/v3/search/trending`)
     .then(response => {
-      console.log("Raw data: ", response);
+      console.log('Raw data: ', response);
       const originalCoins = response.data.coins;
       originalCoins.forEach(element => {
         element.item.favorite_status = false;
@@ -25,28 +27,28 @@ function Home() {
 
       if (localStorage.getItem("FavCoinsIDs")) {
         originalCoins.forEach(element => {
-          if (localStorage.getItem("FavCoinsIDs").includes(element.item.id) ){
+          if (localStorage.getItem('FavCoinsIDs').includes(element.item.id) ){
             element.item.favorite_status = true;
           }
         });
       }
       else {
-        localStorage.setItem("FavCoinsIDs", favCoinsIDs );
+        localStorage.setItem('FavCoinsIDs', favCoinsIDs );
       }
 
       setTrendingCoins(originalCoins);
     });
   }, []); 
 
-  console.log("Trending Coins: ", trendingCoins);
-  console.log("Search Coins: ", searchResults);
+  console.log('Trending Coins: ', trendingCoins);
+  console.log('Search Coins: ', searchResults);
 
   function toggleFavoriteStatus(row) {
     const coinToUpdateIndex = trendingCoins.findIndex(coin => coin.item.coin_id === row.original.item.coin_id);
     const temporaryTrendingCoins = [...trendingCoins];
 
     temporaryTrendingCoins.forEach(element => {
-      if (localStorage.getItem("FavCoinsIDs").includes(element.item.id) ){
+      if (localStorage.getItem('FavCoinsIDs').includes(element.item.id) ){
         element.item.favorite_status = true;
       }
       else {
@@ -61,10 +63,10 @@ function Home() {
       if (element.item.favorite_status === true) {
         favCoinsIDs.push(element.item.id);
       }
-      localStorage.setItem("FavCoinsIDs", favCoinsIDs );
+      localStorage.setItem('FavCoinsIDs', favCoinsIDs );
     });
 
-    console.log("Favorite Coins IDs: ", favCoinsIDs);
+    console.log('Favorite Coins IDs: ', favCoinsIDs);
   }
 
   function getSearchData(searchedTerm) {
@@ -79,7 +81,7 @@ function Home() {
       setSearchResults([]);
     }
 
-    console.log("Searched term: ", searchedTerm);
+    console.log('Searched term: ', searchedTerm);
   }
 
   const debouncedOnSearch = useMemo(

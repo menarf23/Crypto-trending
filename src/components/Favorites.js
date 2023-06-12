@@ -1,8 +1,10 @@
 import axios from "axios";
-import FavoriteCoinsTable from "./FavoriteCoinsTable";
-import Header from "./Header";
 import * as React from "react";
 import { useEffect, useState } from "react";
+
+import FavoriteCoinsTable from "./FavoriteCoinsTable";
+import Header from "./Header";
+
 
 function Favorites() {
 
@@ -17,9 +19,9 @@ function Favorites() {
         element.item.favorite_status = false;
       });
 
-      if (localStorage.getItem("FavCoinsIDs")) {
+      if (localStorage.getItem('FavCoinsIDs')) {
         originalCoins.forEach(element => {
-          if (localStorage.getItem("FavCoinsIDs").includes(element.item.id) ){
+          if (localStorage.getItem('FavCoinsIDs').includes(element.item.id) ){
             element.item.favorite_status = true;
           }
         });
@@ -33,7 +35,7 @@ function Favorites() {
     const temporaryTrendingCoins = [...trendingCoins];
 
     temporaryTrendingCoins.forEach(element => {
-      if (localStorage.getItem("FavCoinsIDs").includes(element.item.id) ){
+      if (localStorage.getItem('FavCoinsIDs').includes(element.item.id) ){
         element.item.favorite_status = true;
       }
       else {
@@ -48,10 +50,10 @@ function Favorites() {
       if (element.item.favorite_status === true) {
         favCoinsIDs.push(element.item.id);
       }
-      localStorage.setItem("FavCoinsIDs", favCoinsIDs );
+      localStorage.setItem('FavCoinsIDs', favCoinsIDs );
     });
 
-    console.log("Favorite Coins IDs: ", favCoinsIDs);
+    console.log('Favorite Coins IDs: ', favCoinsIDs);
   }
 
   return (

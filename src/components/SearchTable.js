@@ -2,6 +2,7 @@ import * as React from "react";
 import { useMemo } from "react";
 import {useTable, usePagination} from "react-table";
 
+
 function SearchTable(props) {
 
     const searchCoins = props.searchCoins;
@@ -10,7 +11,7 @@ function SearchTable(props) {
     
     const columns = useMemo(() => [
       {
-        Header: "",
+        Header: '',
         Cell: tableProps => (
           <img
             src={tableProps.row.original.large}
@@ -21,15 +22,15 @@ function SearchTable(props) {
         accessor: "large",
       },
       {
-        Header: "COIN",
+        Header: 'COIN',
         accessor: "name",
       },
       {
-        Header: "SYMBOL",
+        Header: 'SYMBOL',
         accessor: "symbol",
       },
       {
-        Header: "MKT CAP #",
+        Header: 'MKT CAP #',
         accessor: "market_cap_rank",
       }
     ], [searchCoins]);
@@ -37,10 +38,10 @@ function SearchTable(props) {
   
     const {getTableProps, getTableBodyProps, headerGroups, 
       page, nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, state, 
-      gotoPage, pageCount, setPageSize, prepareRow} 
-    = useTable({columns, data: tableData}, usePagination);
+      gotoPage, pageCount, prepareRow} 
+    = useTable({columns, data: tableData, initialState: { pageSize: 20 } }, usePagination);
   
-    const {pageIndex, pageSize} = state;
+    const {pageIndex} = state;
   
     return (
       <div className="search-table">
@@ -72,14 +73,15 @@ function SearchTable(props) {
               })}
             </tbody>
           </table>
+          {searchCoins.length > 20 ? 
           <div>
             <span>
-              Page{" "}
+              Page {" "}
               <strong>
                 {pageIndex + 1} of {pageOptions.length}
-              </strong>{" "}
+              </strong> {" "}
             </span>
-            <span>
+            <span style={{margin:10}}>
               | Go to page: {" "}
               <input type="number" defaultValue={pageIndex + 1} 
               onChange={e => {
@@ -89,20 +91,11 @@ function SearchTable(props) {
                 style={{width: "50px"}}
               />
             </span>
-            <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-              {
-                [5,10,20].map(pageSize => (
-                  <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                  </option>
-                ))
-              }
-            </select>
             <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button>
             <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
             <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
             <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button>
-          </div>
+          </div> : null}
         </div>
       </div>
     );
