@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useMemo } from "react";
-import {useTable, usePagination} from "react-table";
+import { useTable, usePagination } from "react-table";
 
 
 function SearchTable(props) {

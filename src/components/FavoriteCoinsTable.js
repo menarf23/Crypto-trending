@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useMemo } from "react";
-import {useTable, usePagination} from "react-table";
+import { useTable, usePagination } from "react-table";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Fab from "@mui/material/Fab";
