@@ -52,8 +52,6 @@ function Favorites() {
       }
       localStorage.setItem('FavCoinsIDs', favCoinsIDs );
     });
-
-    console.log('Favorite Coins IDs: ', favCoinsIDs);
   }
 
   return (
