@@ -31,7 +31,7 @@ You may also see any lint errors in the console.
 
 ### Deployment
 
-App was deployed on Vercel platform and can be found at the following address: https://crypto-trending-launch-test.vercel.app/
+App was deployed on Vercel platform and can be found at the following address: https://crypto-trending-launch-test.vercel.app/ .
 Vercel deployment is connected to the github repository.
 Each and every commit to the main branch gets automatically deployed on to the Vercel platform.
 
